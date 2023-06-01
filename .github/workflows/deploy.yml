@@ -1,0 +1,30 @@
+name: remote ssh command
+on:
+  push:
+    branches: [main]
+
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v1
+
+    - name: connect remote server
+      uses: appleboy/ssh-action@master
+      with:
+        host: 34.227.173.42
+        username: ubuntu
+        key: ${{ secrets.AWS_SERVER }}
+        port: 22
+        script: |
+          whoami
+          cd /var/www/Api/SeaBreeze
+          sudo git stash
+          sudo git stash clear
+          sudo git pull https://rovshanguli:${{secrets.GIT_TOKEN}}@github.com/rovshanguli/SeaBreeze.git main
+          sudo systemctl stop api
+          sudo dotnet publish -c "Release" -o /var/www/Api/build
+          sudo systemctl start api

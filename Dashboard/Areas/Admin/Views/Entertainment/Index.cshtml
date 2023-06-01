@@ -1,0 +1,97 @@
+﻿
+@model List<SeaBreeze.Domain.Entity.Entertainments.Entertainment>
+@*@if (Model.Count > 0)
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Logo</th>
+                <th>Phone Number</th>
+                <th>Description</th>
+                <th>Images</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var entertainment in Model)
+            {
+                <tr>
+                    <td>@entertainment.Name</td>
+                    <td>
+                        <img src="@Url.Content("~/entertainmentlogo/" + entertainment.Logo)" alt="Logo" style="width: 50px; height: 50px;" />
+                    </td>
+                    <td>@entertainment.PhoneNumber</td>
+                    <td>
+                        @foreach (var translate in entertainment.EntertainmentTranslates)
+                        {
+                            <div>
+                                <strong>@translate.LangCode:</strong> @translate.Description
+                            </div>
+                        }
+                    </td>
+                    <td>
+                        @if (entertainment.EntertainmentImages.Count > 0)
+                        {
+                            <div>
+                                @foreach (var image in entertainment.EntertainmentImages)
+                                {
+                                    <img src="@Url.Content("~/entertainmentgallery/" + image.Url)" alt="Image" style="width: 50px; height: 50px;" />
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div>No images available</div>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No entertainment available.</p>
+}
+
+  <a class="btn btn-primary text-white"  asp-action="Create" style="float:right;">Create</a>
+*@
+
+
+<div class="page-content">
+    <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+        <div>
+            <h4 class="mb-3 mb-md-0">
+                Entertainment
+            </h4>
+            <p class="time-calendar">Today, 10th September 2020</p>
+        </div>
+      
+       <div class="flex-sellect-addnew">
+        <select id="language-select">
+            <option value="az">AZE &#9662;</option>
+            <option value="en">English &#9662;</option>
+            <option value="fr">French &#9662;</option>
+            <option value="es">Spanish &#9662;</option>
+        </select>
+            <button class="addEnter">
+        <a asp-action="create" asp-controller="Entertainment">
+            Add new
+        </a>
+        </button>
+
+       </div>
+    </div>
+    @if (Model.Count > 0){
+        @foreach (var item in Model)
+        {
+            <div class="flex-menu-admin left-right-admin">
+                <a >@item.Name</a>
+            </div>
+        }
+    }
+    else{
+        <p>No entertainment available.</p>
+    }
+   
+</div>

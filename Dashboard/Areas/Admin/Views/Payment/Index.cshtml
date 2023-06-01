@@ -1,0 +1,91 @@
+﻿@using Dashboard.Areas.ViewModels;
+@model List<BeachClubTicketVM>
+
+<div class="page-content">
+    <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin" style="margin-right: 1rem;">
+        <div>
+            <h4 class="mb-3 mb-md-0" style="font-weight: 700;">
+                Beach Club Payments
+            </h4>
+
+        </div>
+        <div class="d-flex align-items-center flex-wrap text-nowrap ">
+            <p class="time-calendar ">Today, 10th September 2020</p>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+
+        <div class="col-6">
+            <div class="form">
+                <i class="fa fa-search"></i>
+                <input type="text" class="form-control form-input" placeholder="Search">
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center flex-wrap text-nowrap">
+            <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0"
+                 id="dashboardDate">
+
+                <input type="text"
+                       class="form-control bg-transparent"
+                       placeholder="10.01.2022"
+                       data-input /> <span class="input-group-text input-group-addon bg-transparent"
+                                           data-toggle>
+                    <i data-feather="calendar" class="text-secondary"></i>
+                </span>
+            </div>
+            <div class="input-group flatpickr wd-200 me-2 mb-2 mb-md-0"
+                 id="dashboardDate">
+
+                <input type="text"
+                       class="form-control bg-transparent"
+                       placeholder="15.01.2022"
+                       data-input />     <span class="input-group-text input-group-addon bg-transparent"
+                                               data-toggle>
+                    <i data-feather="calendar" class="text-secondary"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-xl-12 grid-margin grid-margin-xl-0 stretch-card">
+            <div class="card">
+                <div class="card-body"
+                     style="display: flex; flex-direction: column; gap: 1rem">
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name, Surname</th>
+                                <th scope="col">Tarix</th>
+                                <th scope="col">Beach Club</th>
+                                <th scope="col">Rose Bar</th>
+                                <th scope="col">Ümumi məbləğ</th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-weight: 500;">
+                            @foreach (var ticket in Model)
+                            {
+                                 <tr>
+                                <th scope="row">01</th>
+                                <td>@ticket.UserFullName</td>
+                                <td>@ticket.ValidTime</td>
+                                <td>120 AZN</td>
+                                @*<td>@ticket.BeachClubPrice</td>*@
+                                <td>200 AZN</td>
+                               @* <td>@ticket.RoseBarPrice</td>*@
+                                 <td>@ticket.TotalPrice</td> 
+                                 </tr>
+                            }
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
